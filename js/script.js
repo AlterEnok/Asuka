@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Инициализация i18next
 i18next.init({
-    lng: 'en', // начальный язык
+    lng: 'en',
     resources: {
         en: {
             translation: {
@@ -38,12 +38,14 @@ i18next.init({
     if (err) {
         console.error('i18next initialization failed:', err);
     } else {
-        // Загружаем переводы после инициализации
+
         updateContent();
+
+        updateFlagVisibility(i18next.language);
     }
 });
 
-// Функция для обновления контента страницы
+
 function updateContent() {
     document.querySelectorAll("[data-i18n]").forEach(function (element) {
         const key = element.getAttribute("data-i18n");
@@ -51,23 +53,56 @@ function updateContent() {
     });
 }
 
-// Переключение языка
+
+function updateFlagVisibility(lang) {
+    if (lang === 'en') {
+        document.getElementById("en-flag").style.opacity = '1';
+        document.getElementById("en-flag").style.transform = 'translateY(0)';
+        document.getElementById("hr-flag").style.opacity = '0';
+        document.getElementById("hr-flag").style.transform = 'translateY(100%)';
+    } else if (lang === 'hr') {
+        document.getElementById("hr-flag").style.opacity = '1';
+        document.getElementById("hr-flag").style.transform = 'translateY(0)';
+        document.getElementById("en-flag").style.opacity = '0';
+        document.getElementById("en-flag").style.transform = 'translateY(-100%)';
+    }
+}
+
+
 document.getElementById("language-toggle").addEventListener("click", function () {
     const currentLang = i18next.language;
 
     if (currentLang === 'en') {
+
         i18next.changeLanguage('hr', function () {
-            // После изменения языка обновляем контент
+
             updateContent();
+
+            updateFlagVisibility('hr');
         });
-        document.getElementById("en-flag").style.display = 'none';
-        document.getElementById("hr-flag").style.display = 'inline';
     } else {
+
         i18next.changeLanguage('en', function () {
-            // После изменения языка обновляем контент
+
             updateContent();
+
+            updateFlagVisibility('en');
         });
-        document.getElementById("hr-flag").style.display = 'none';
-        document.getElementById("en-flag").style.display = 'inline';
     }
+});
+
+
+document.getElementById("hr-flag").addEventListener("mouseenter", function () {
+    document.getElementById("hr-flag").style.opacity = '0';
+    document.getElementById("hr-flag").style.transform = 'translateY(100%)';
+    document.getElementById("en-flag").style.opacity = '1';
+    document.getElementById("en-flag").style.transform = 'translateY(0)';
+});
+
+
+document.getElementById("en-flag").addEventListener("mouseenter", function () {
+    document.getElementById("en-flag").style.opacity = '0';
+    document.getElementById("en-flag").style.transform = 'translateY(-100%)';
+    document.getElementById("hr-flag").style.opacity = '1';
+    document.getElementById("hr-flag").style.transform = 'translateY(0)';
 });

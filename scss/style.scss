@@ -121,10 +121,19 @@ body {
         &__list {
             display: flex;
             list-style: none;
-            gap: clamp(20px, 5vw, 48px);
+            gap: clamp(25px, 15vw, 58px);
+            margin-right: 16vh;
 
             @media (max-width: 767px) {
                 display: none; // Скрыть меню на мобильных
+            }
+
+            &-left {
+                margin-left: 17vh;
+            }
+
+            &-right {
+                margin-right: 30vh;
             }
         }
 
@@ -134,15 +143,15 @@ body {
 
             &--left,
             &--right {
-                gap: clamp(10px, 2vw, 20px);
+                gap: clamp(-11px, -9vw, -12px);
             }
 
             &--center {
                 text-align: center;
 
                 .nav__logo {
-                    width: clamp(100px, 10vw, 150px);
-                    margin-right: -50px;
+                    width: clamp(100px, 15vw, 183px);
+
 
                     @media (max-width: 767px) {
                         margin-right: 0;
@@ -198,28 +207,69 @@ body {
 
 }
 
-/*language*/
-
 .language-toggle {
     position: absolute;
     top: 20px;
-    /* Позиционирование по высоте */
     right: 20px;
-    /* Позиционирование справа */
     z-index: 100;
-    /* чтобы иконка была поверх других элементов */
 }
 
 .language-button {
-    background: none;
+    border-radius: 50%;
+    position: relative;
+    bottom: -9vh;
+    left: -17vh;
     border: none;
     cursor: pointer;
-}
+    width: 60px;
+    height: 40px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.language-button img {
-    width: 30px;
-    /* Размер флагов */
-    height: 20px;
+    img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+
+    #en-flag {
+        opacity: 1;
+        transform: translateY(0);
+        z-index: 2;
+
+    }
+
+    #hr-flag {
+        opacity: 0;
+        transform: translateY(100%);
+        z-index: 1;
+    }
+
+
+    &:hover #en-flag {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    &:hover #hr-flag {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+
+    @media (min-width: 1920px) {
+        bottom: -6vh;
+        left: -12vh;
+    }
+
+    @media (max-width: 767px) {
+        bottom: 1vh;
+        left: 1vh;
+    }
 }
 
 /* Мобильный стиль */
@@ -302,13 +352,14 @@ body {
 
     &__buttons {
         position: absolute;
-        bottom: 20%;
+        bottom: 15%;
         display: flex;
         gap: clamp(10px, 3vw, 20px);
         z-index: 3;
         justify-content: space-between;
         width: 100%;
         max-width: 1300px;
+
 
 
 
@@ -328,8 +379,11 @@ body {
         justify-content: center;
         gap: clamp(5px, 1.5vw, 10px);
         padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 24px);
-        font-size: clamp(14px, 2.5vw, 18px);
-        font-weight: 500;
+        font-weight: 400;
+        font-size: 32px;
+        font-family: "Lilita One",
+            sans-serif;
+        ;
         cursor: pointer;
         border-radius: 30px;
         transition: all 0.3s ease;
