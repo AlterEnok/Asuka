@@ -368,7 +368,6 @@ body {
 }
 @media (max-width: 767px) {
   .nav__mobile-menu {
-    display: block;
     position: fixed;
     top: 0;
     left: -100%;
@@ -378,6 +377,7 @@ body {
     z-index: 100;
     padding-top: 20px;
     transition: left 0.3s ease;
+    display: flex;
   }
 }
 .nav__mobile-menu._active {
@@ -388,9 +388,11 @@ body {
   flex-direction: column;
   gap: 40px;
   align-items: center;
+  text-align: center;
 }
 @media (max-width: 767px) {
   .nav__mobile-menu .nav__list {
     padding: clamp(16px, 19vh, 24vh);
+    white-space: nowrap;
   }
 }/*# sourceMappingURL=style.css.map */

@@ -422,7 +422,7 @@ body {
     display: none;
 
     @media (max-width: 767px) {
-        display: block;
+
         position: fixed;
         top: 0;
         left: -100%;
@@ -432,6 +432,9 @@ body {
         z-index: 100;
         padding-top: 20px;
         transition: left 0.3s ease;
+
+        display: flex;
+
     }
 
     &._active {
@@ -443,11 +446,17 @@ body {
         flex-direction: column;
         gap: 40px;
         align-items: center;
+        text-align: center;
+
 
         @media (max-width: 767px) {
-            padding: clamp(16px, 19vh, 24vh)
+
+            padding: clamp(16px, 19vh, 24vh);
+            white-space: nowrap;
         }
 
 
     }
+
+
 }
